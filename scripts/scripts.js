@@ -136,6 +136,7 @@ function updateProgressBar() {
     }
 }
 
+
 function updatePlaylistDisplay() {
     const tbody = document.querySelector('#playlist tbody');
     tbody.innerHTML = ''; // Clear the current playlist display
@@ -162,11 +163,12 @@ function onPlayerStateChange(event) {
     }
 }
 
+
 function updateVideoInfo() {
     if (playerReady) {
         const videoData = player.getVideoData();
         if (videoData && videoData.title) {
-            document.getElementById('videoTitle').innerText = `Now Playing\n ${videoData.title}`;
+            document.getElementById('videoTitle').innerText = `Now Playing\n ${videoData.title}`;dy
         }
     }
 }
@@ -176,3 +178,47 @@ function formatDuration(seconds) {
     const remainingSeconds = Math.floor(seconds % 60);
     return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
 }
+
+// Export playlist as JSON and download it
+document.getElementById('exportButton').addEventListener('click', function() {
+    if (playlist.length === 0) {
+        alert('Error: You cannot export an empty playlist.');
+        return; // Stop the function from continuing
+    }
+    
+    const jsonPlaylist = JSON.stringify(playlist);
+    const blob = new Blob([jsonPlaylist], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'playlist.json';
+    a.click();
+    URL.revokeObjectURL(url); // Clean up the URL object
+});
+
+// Show the file input when 'Import Playlist' is clicked
+document.getElementById('importButton').addEventListener('click', function() {
+    document.getElementById('importFileInput').click();
+});
+
+// Handle importing JSON file
+document.getElementById('importFileInput').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            try {
+                const importedPlaylist = JSON.parse(e.target.result);
+                if (Array.isArray(importedPlaylist)) {
+                    playlist = importedPlaylist; // Overwrite the current playlist with the imported one
+                    updatePlaylistDisplay(); // Update the playlist UI
+                } else {
+                    alert('Invalid playlist format.');
+                }
+            } catch (error) {
+                alert('Error reading playlist file.');
+            }
+        };
+        reader.readAsText(file);
+    }
+});
