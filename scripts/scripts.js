@@ -30,6 +30,7 @@ let playlist = [];
 let currentSongIndex = -1;
 let playerReady = false;
 let progressInterval = null;
+const apiKey='AIzaSyAo8UHuUsoII2RPQg9QmcsQW1i_QpTIMGk';
 
 // Ensure this is globally accessible
 function onYouTubeIframeAPIReady() {
@@ -137,14 +138,38 @@ function updateProgressBar() {
 }
 
 
-function updatePlaylistDisplay() {
+// Function to get video titles via YouTube Data API
+async function fetchVideoTitle(videoId) {
+    const apiUrl = `https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=${apiKey}`;
+    try {
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        if (data.items.length > 0) {
+            return data.items[0].snippet.title;
+        } else {
+            return videoId; // Fallback to videoId if title not found
+        }
+    } catch (error) {
+        console.error('Error fetching video title:', error);
+        return videoId; // Fallback to videoId in case of error
+    }
+}
+
+// Update playlist display with titles
+async function updatePlaylistDisplay() {
     const tbody = document.querySelector('#playlist tbody');
     tbody.innerHTML = ''; // Clear the current playlist display
-    playlist.forEach((videoId, index) => {
+
+    for (let i = 0; i < playlist.length; i++) {
+        const videoId = playlist[i];
         const row = document.createElement('tr');
-        row.innerHTML = `<td>${index + 1}. ${videoId}</td>`; // Display the index as a counter
+
+        // Fetch the video title asynchronously
+        const videoTitle = await fetchVideoTitle(videoId);
+
+        row.innerHTML = `<td>${i + 1}. ${videoTitle}</td>`; // Display the video title
         tbody.appendChild(row); // Append the row to the table body
-    });
+    }
 }
 
 function extractVideoID(url) {
