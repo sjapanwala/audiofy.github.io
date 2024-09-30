@@ -3,14 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Music Player</title>
+    <title>Audiofy</title>
     <link rel="stylesheet" href="scripts/styles.css">
 </head>
 <body>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span id="close" class="close">&times;</span>
+            <p ><strong><h1 class="modal-title">Welcome to Audiofy!</h1></strong><br>Paste Youtube Links, And Listen To The Music Add Free!<br><br><strong><h2 class="modal-title">Have FUN!</h2></strong>Feel free to visit the Github for more projects, or to submit any bugs. Visit my website aswell!<h3 class="modal-title">Note</h3></strong> - Some links are copyrighted and may not work. (using official music will probably cause this to happen, use lyric videos)<br> - Some browsers or extentions automatically create a miniplayer, if you have those, the youtube link will be created into a mini player.</p>
+            <div>
+                <a href="https://github.com/sjapanwala">
+                    <img src="elements/icons8-github-50.png" alt="Goto Github">
+                </a>
+                <a href="https://sjapanwala.github.io/index.html">
+                    <img src="elements/icons8-resume-website-50.png" alt="Goto Website">
+                </a>
+            </div>
+        <button id="confirmButton">Sounds Good! 👍</button>
+        </div>
+    </div>
     <div id="player">
-        <h1>Music Player</h1>
-        <input type="text" id="urlInput" placeholder="Enter YouTube URL">
-        <button id="submitButton">Add to Queue</button>
+        
+        <h1 class="modal-title">Audiofy ♫</h1>
+        <!--<img id="record" src="elements/vinyl.png" alt="Spinning Record" style="display: none;" />-->
+        <p id="videoTitle">Now Playing<br>Nothing</p>
+        <div id="progress-container">
+            <progress id="progressBar" value="0" max="100"></progress>
+            <p id="videoDuration">0:00 / 0:00</p>
+        </div>
 
         <div id="controls">
             <button id="skipPreviousButton">Previous</button>
@@ -18,18 +38,17 @@
             <button id="pauseButton">Pause</button>
             <button id="skipNextButton">Next</button>
         </div>
-
-        <div id="progress-container">
-            <progress id="progressBar" value="0" max="100"></progress>
-            <p id="videoDuration">Duration: 0:00</p>
-        </div>
-
-        <p id="videoTitle">Not Playing</p>
+        <br>
+        <br>
+        <input type="text" id="urlInput" placeholder="URL Goes Here"><br>
+        <button id="submitButton">Add to Queue</button>
 
         <table id="playlist">
             <thead>
                 <tr>
-                    <th>Song</th>
+                    <th align="center">
+                        Video ID's
+                    </th>
                 </tr>
             </thead>
             <tbody></tbody>
@@ -38,7 +57,11 @@
 
     <div id="playerContainer" style="display: none;"></div>
 
+    <!-- Popup for errors -->
+    <!--<div id="errorPopup"></div>-->
+
     <script src="https://www.youtube.com/iframe_api"></script>
     <script src="scripts/scripts.js"></script>
 </body>
+
 </html>

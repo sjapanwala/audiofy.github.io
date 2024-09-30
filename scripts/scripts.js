@@ -1,3 +1,30 @@
+// Show the custom modal when the page loads
+window.onload = function() {
+    const modal = document.getElementById("modal");
+    const confirmButton = document.getElementById("confirmButton");
+    const closeButton = document.getElementById("close");
+
+    // Display the modal
+    modal.style.display = "block";
+
+    // Close the modal when the user clicks on <span> (x)
+    closeButton.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // Close the modal when the user clicks the "OK" button
+    confirmButton.onclick = function() {
+        modal.style.display = "none"; // Hide the modal
+    }
+
+    // Close the modal when clicking outside of the modal
+    window.onclick = function(event) {
+        if (event.target === modal) {
+            modal.style.display = "none"; // Hide the modal
+        }
+    }
+};
+
 let player;
 let playlist = [];
 let currentSongIndex = -1;
@@ -104,18 +131,18 @@ function updateProgressBar() {
         }
 
         if (!isNaN(currentTime) && !isNaN(duration)) {
-            document.getElementById('videoDuration').innerText = `Duration: ${formatDuration(currentTime)} / ${formatDuration(duration)}`;
+            document.getElementById('videoDuration').innerText = `${formatDuration(currentTime)} / ${formatDuration(duration)}`;
         }
     }
 }
 
 function updatePlaylistDisplay() {
     const tbody = document.querySelector('#playlist tbody');
-    tbody.innerHTML = '';
+    tbody.innerHTML = ''; // Clear the current playlist display
     playlist.forEach((videoId, index) => {
         const row = document.createElement('tr');
-        row.innerHTML = `<td>Video ID: ${videoId}</td>`;
-        tbody.appendChild(row);
+        row.innerHTML = `<td>${index + 1}. ${videoId}</td>`; // Display the index as a counter
+        tbody.appendChild(row); // Append the row to the table body
     });
 }
 
@@ -139,7 +166,7 @@ function updateVideoInfo() {
     if (playerReady) {
         const videoData = player.getVideoData();
         if (videoData && videoData.title) {
-            document.getElementById('videoTitle').innerText = `Title: ${videoData.title}`;
+            document.getElementById('videoTitle').innerText = `Now Playing\n ${videoData.title}`;
         }
     }
 }
