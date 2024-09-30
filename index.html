@@ -10,7 +10,7 @@
     <div id="modal" class="modal">
         <div class="modal-content">
             <span id="close" class="close">&times;</span>
-            <p ><strong><h1 class="modal-title">Welcome to Audiofy!</h1></strong><br>Paste Youtube Links, And Listen To The Music Add Free!<br><br><strong><h2 class="modal-title">Have FUN!</h2></strong>Feel free to visit the Github for more projects, or to submit any bugs. Visit my website aswell!<h3 class="modal-title">Note</h3></strong> - Some links are copyrighted and may not work. (using official music will probably cause this to happen, use lyric videos)<br> - Some browsers or extentions automatically create a miniplayer, if you have those, the youtube link will be created into a mini player.</p>
+            <p ><strong><h1 class="modal-title">Welcome to Audiofy!</h1></strong><br>Paste Youtube Links, And Listen To The Music Add Free!<br><br><strong><h2 class="modal-title">Have FUN!</h2></strong>Feel free to visit the Github for more projects, or to submit any bugs. Visit my website aswell!<h3 class="modal-title">Note</h3></strong> - Ads only work in copyrighted audio's. We suggest installing an Ad-Blocker, or keep skipping until ads go away.<br> - Some browsers or extentions automatically create a miniplayer, if you have those, the youtube link will be created into a mini player.</p>
             <div>
                 <a href="https://github.com/sjapanwala">
                     <img src="elements/icons8-github-50.png" alt="Goto Github">
@@ -47,7 +47,11 @@
             <thead>
                 <tr>
                     <th align="center">
-                        Video ID's
+                        <div id="playlistControls">
+                            <button id="exportButton">Export Playlist</button>
+                            <input type="file" id="importFileInput" accept=".json" style="display: none;">
+                            <button id="importButton">Import Playlist</button>
+                        </div>
                     </th>
                 </tr>
             </thead>
