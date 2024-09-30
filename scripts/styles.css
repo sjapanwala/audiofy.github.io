@@ -1,0 +1,52 @@
+/* Center the player and controls */
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+}
+
+#player {
+    text-align: center;
+    width: 400px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#controls {
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    background-color: #3498db;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+#videoInfo {
+    margin-top: 20px;
+}
+
+#playlist {
+    width: 100%;
+    margin-top: 20px;
+    text-align: left;
+}
+
+#playlist th, #playlist td {
+    padding: 8px;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+}

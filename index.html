@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple Music Player</title>
-    <link rel="stylesheet" href="scripts/styles.css"> <!-- Adjust the path if necessary -->
+    <link rel="stylesheet" href="scripts/styles.css">
 </head>
 <body>
     <div id="player">
@@ -13,10 +13,18 @@
         <button id="submitButton">Add to Queue</button>
 
         <div id="controls">
-            <button id="playButton">Play</button>
-            <button id="skipNextButton">Next</button>
             <button id="skipPreviousButton">Previous</button>
+            <button id="playButton">Play</button>
+            <button id="pauseButton">Pause</button>
+            <button id="skipNextButton">Next</button>
         </div>
+
+        <div id="progress-container">
+            <progress id="progressBar" value="0" max="100"></progress>
+            <p id="videoDuration">Duration: 0:00</p>
+        </div>
+
+        <p id="videoTitle">Not Playing</p>
 
         <table id="playlist">
             <thead>
@@ -28,7 +36,7 @@
         </table>
     </div>
 
-    <div id="playerContainer" style="display: none;"></div> <!-- Hidden container for the player -->
+    <div id="playerContainer" style="display: none;"></div>
 
     <script src="https://www.youtube.com/iframe_api"></script>
     <script src="scripts/scripts.js"></script>
